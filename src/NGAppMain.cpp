@@ -36,22 +36,17 @@ int NGAppMain(int* argc, char*** argv, const NGAppData& data)
 			QSemaphore sem(nglibRestorationGroup.groupList().length());
 			for (const auto& key : nglibRestorationGroup.groupList()) {
 				auto subgroup = nglibRestorationGroup.group(key);
-				auto restorationClass = subgroup.readEntry<QString>(nglibRestorationClassKey, "");
-				auto type = QMetaType::type(restorationClass.toStdString().c_str());
-
-				if (type == QMetaType::UnknownType) {
-					qWarning() << "Unknown restoration class" << restorationClass;
+				auto restorer = getRestorer(subgroup);
+				if (restorer == nullptr) {
 					sem.release();
 					continue;
 				}
 
-				NGRestorer* restorer = qobject_cast<NGRestorer*>(QMetaType::metaObjectForType(type)->newInstance());
-
 				sem.acquire();
-				restorer->restore(QUuid::fromString(key), subgroup, [&sem, restorer](NGSavable*) {
+				restorer->restore(QUuid::fromString(key), subgroup, [&sem, restorer](QObject*) {
 					sem.release();
 
-					restorer->deleteLater();
+					delete restorer;
 				});
 			}
 			sem.acquire();

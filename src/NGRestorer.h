@@ -38,10 +38,10 @@ This requires a few things:
 
 class NGSavable;
 
-class NGLIB_EXPORT NGRestorer : public QObject
+class NGLIB_EXPORT NGRestorer
 {
 public:
-	using CompletionHandler = std::function<void(NGSavable*)>;
+	using CompletionHandler = std::function<void(QObject*)>;
 
 	virtual ~NGRestorer();
 	virtual void restore(QUuid id, const KConfigGroup& state, CompletionHandler completionHandler) = 0;

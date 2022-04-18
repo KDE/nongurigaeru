@@ -25,9 +25,7 @@ void NGApplication::saveSavables(KConfigGroup& group)
 	}
 
 	for (const auto* savable : d->savables) {
-		auto grp = group.group(savable->identifier().toString(QUuid::WithoutBraces));
-		auto data = savable->save(grp);
-		grp.writeEntry(nglibRestorationClassKey, data.className);
+		auto data = saveSavable(group, savable);
 		if (!data.ok) {
 			// TODO: error handling
 		}

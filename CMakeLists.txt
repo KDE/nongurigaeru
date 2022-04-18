@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.16)
 
 project(NGLib LANGUAGES CXX VERSION 1.0.0)
 
+enable_testing()
+
 find_package(ECM REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
@@ -25,3 +27,7 @@ find_package(
 )
 
 add_subdirectory(src)
+
+if (BUILD_TESTING)
+	add_subdirectory(test)
+endif()

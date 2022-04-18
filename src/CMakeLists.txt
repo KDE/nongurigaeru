@@ -2,6 +2,7 @@ add_library(
 	NGLib
 		NGApplication.cpp
 		NGAppMain.cpp
+		NGPropertySavingRestoring.cpp
 		NGRestorer.cpp
 		NGSavable.cpp
 		NGSelfSavable.cpp
@@ -20,6 +21,7 @@ install(
 
 		NGApplication.h
 		NGAppMain.h
+		NGPropertySavingRestoring.h
 		NGRestorer.h
 		NGSavable.h
 		NGSelfSavable.h
@@ -27,6 +29,11 @@ install(
 		${CMAKE_CURRENT_BINARY_DIR}/nglib_export.h
 	DESTINATION
 		${KDE_INSTALL_INCLUDEDIR}/NGLib
+)
+
+target_include_directories(NGLib
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
+    INTERFACE "$<INSTALL_INTERFACE:${NGLIB_INSTALL_INCLUDEDIR}>"
 )
 
 target_link_libraries(NGLib

@@ -7,8 +7,11 @@
 
 class NGLIB_EXPORT NGSelfSavable : public NGRestorer, public NGSavable
 {
+public:
 	virtual ~NGSelfSavable();
 };
+
+Q_DECLARE_INTERFACE(NGSelfSavable, "org.kde.NGSelfSavable/1.0");
 
 #define NGDefineSelfSavableMethods \
 	NGDefineRestorerMethods \
