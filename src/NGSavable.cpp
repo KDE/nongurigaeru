@@ -2,5 +2,4 @@
 
 NGSavable::~NGSavable()
 {
-
 }

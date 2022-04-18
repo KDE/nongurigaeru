@@ -2,5 +2,4 @@
 
 NGRestorer::~NGRestorer()
 {
-
 }

@@ -15,4 +15,4 @@ Q_DECLARE_INTERFACE(NGSelfSavable, "org.kde.NGSelfSavable/1.0");
 
 #define NGDefineSelfSavableMethods \
 	NGDefineRestorerMethods \
-	NGDefineSavableMethods
+		NGDefineSavableMethods

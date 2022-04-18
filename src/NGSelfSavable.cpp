@@ -2,5 +2,4 @@
 
 NGSelfSavable::~NGSelfSavable()
 {
-
 }

@@ -18,7 +18,7 @@ public:
 	QUuid m_id;
 	QString m_foo;
 
-    Q_INVOKABLE SimpleObject() : QObject(), NGSelfSavable() { }
+	Q_INVOKABLE SimpleObject() : QObject(), NGSelfSavable() { }
 	void restore(QUuid id, const KConfigGroup& state, CompletionHandler completionHandler) override
 	{
 		auto ret = new SimpleObject;
@@ -49,15 +49,15 @@ public:
 	QUuid m_id;
 	SimpleObject* m_foo = nullptr;
 	int m_wu = 0;
-    Q_PROPERTY(SimpleObject* foo MEMBER m_foo)
-    Q_PROPERTY(int wu MEMBER m_wu)
+	Q_PROPERTY(SimpleObject* foo MEMBER m_foo)
+	Q_PROPERTY(int wu MEMBER m_wu)
 
-    Q_INVOKABLE AutoObject() : QObject(), NGSelfSavable() { }
+	Q_INVOKABLE AutoObject() : QObject(), NGSelfSavable() { }
 	void restore(QUuid id, const KConfigGroup& state, CompletionHandler completionHandler) override
 	{
 		auto ret = new AutoObject;
 		ret->m_id = id;
-        NGPropertySavingRestoring::restoreProperties(state, ret);
+		NGPropertySavingRestoring::restoreProperties(state, ret);
 		completionHandler(ret);
 	}
 	QUuid identifier() const override
@@ -66,7 +66,7 @@ public:
 	}
 	SaveInformation save(KConfigGroup& state) const override
 	{
-        NGPropertySavingRestoring::saveProperties(state, this);
+		NGPropertySavingRestoring::saveProperties(state, this);
 		return SaveInformation{.className = "AutoObject*", .ok = true};
 	}
 };
@@ -87,14 +87,14 @@ private Q_SLOTS:
 		{
 			auto object = new SimpleObject;
 			object->m_foo = "wawajete";
-            saveSavable(grp, object);
+			saveSavable(grp, object);
 		}
-        test->sync();
+		test->sync();
 		{
 			auto restorer = getRestorer(grp.group(QUuid().toString(QUuid::WithoutBraces)));
-            QVERIFY(restorer);
+			QVERIFY(restorer);
 			restorer->restore(QUuid(), grp.group(QUuid().toString(QUuid::WithoutBraces)), [](QObject* obj) {
-                QVERIFY(obj);
+				QVERIFY(obj);
 				auto loaded = qobject_cast<SimpleObject*>(obj);
 				QVERIFY(loaded);
 				QCOMPARE(loaded->m_foo, "wawajete");
@@ -108,16 +108,16 @@ private Q_SLOTS:
 		auto grp = test->group("auto");
 		{
 			auto object = new AutoObject;
-            object->m_foo = new SimpleObject;
+			object->m_foo = new SimpleObject;
 			object->m_foo->m_foo = "wawajete";
-            object->m_wu = 50;
-            saveSavable(grp, object);
+			object->m_wu = 50;
+			saveSavable(grp, object);
 		}
-        test->sync();
+		test->sync();
 		{
 			auto restorer = getRestorer(grp.group(QUuid().toString(QUuid::WithoutBraces)));
 			restorer->restore(QUuid(), grp.group(QUuid().toString(QUuid::WithoutBraces)), [](QObject* obj) {
-                QVERIFY(obj);
+				QVERIFY(obj);
 				auto loaded = qobject_cast<AutoObject*>(obj);
 				QVERIFY(loaded);
 				QVERIFY(loaded->m_foo);
