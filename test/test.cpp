@@ -48,7 +48,9 @@ class AutoObject : public QObject, public NGSelfSavable
 public:
 	QUuid m_id;
 	SimpleObject* m_foo = nullptr;
+	int m_wu = 0;
     Q_PROPERTY(SimpleObject* foo MEMBER m_foo)
+    Q_PROPERTY(int wu MEMBER m_wu)
 
     Q_INVOKABLE AutoObject() : QObject(), NGSelfSavable() { }
 	void restore(QUuid id, const KConfigGroup& state, CompletionHandler completionHandler) override
@@ -108,6 +110,7 @@ private Q_SLOTS:
 			auto object = new AutoObject;
             object->m_foo = new SimpleObject;
 			object->m_foo->m_foo = "wawajete";
+            object->m_wu = 50;
             saveSavable(grp, object);
 		}
         test->sync();
@@ -118,6 +121,7 @@ private Q_SLOTS:
 				auto loaded = qobject_cast<AutoObject*>(obj);
 				QVERIFY(loaded);
 				QVERIFY(loaded->m_foo);
+				QCOMPARE(loaded->m_wu, 50);
 				QCOMPARE(loaded->m_foo->m_foo, "wawajete");
 			});
 		}

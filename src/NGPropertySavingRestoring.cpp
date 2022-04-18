@@ -50,7 +50,8 @@ void NGLIB_EXPORT NGPropertySavingRestoring::restoreProperties(const KConfigGrou
 				delete restorer;
 			});
 		} else {
-			qFatal("Sorry, NGLib can't automatically restore scalar properties yet! This shouldn't be here on release.");
+			auto variant = state.readEntry(prop.name(), QVariant(prop.type(), nullptr));
+			prop.write(on, variant);
 		}
 	}
 }
