@@ -8,6 +8,10 @@ add_library(
 		NGSelfSavable.cpp
 )
 
+ecm_generate_export_header(NGLib
+	VERSION 1.0.0
+)
+
 install(
 	TARGETS
 		NGLib
