@@ -23,7 +23,12 @@ inline QString configName(const QString& id, const QString& key)
 
 inline KSharedConfig::Ptr sessionRestorationConfig()
 {
-	return KSharedConfig::openConfig(configName(qApp->sessionId(), qApp->sessionId()), KConfig::SimpleConfig);
+	return KSharedConfig::openStateConfig(configName(qApp->sessionId(), qApp->sessionId()));
+}
+
+inline KSharedConfig::Ptr preferencesConfig()
+{
+	return KSharedConfig::openConfig();
 }
 
 inline NGSavable::SaveInformation saveSavable(KConfigGroup& parentGroup, const NGSavable* savable, bool child = true)

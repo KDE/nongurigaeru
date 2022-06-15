@@ -4,6 +4,8 @@ Nongurigaeru is the missing Foundation library for Qt GUI apps.
 
 It features, among other things:
 - state restoration abstractions
+- enhanced drag-and-drop components
+- user-editable toolbars
 
 ## The Restoration Classes
 

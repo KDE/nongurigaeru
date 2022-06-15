@@ -8,8 +8,10 @@ add_library(
 		NGSelfSavable.cpp
 )
 
-ecm_generate_export_header(NGLib
-	VERSION 1.0.0
+ecm_generate_export_header(
+	NGLib
+	VERSION
+		${CMAKE_PROJECT_VERSION}
 )
 
 install(

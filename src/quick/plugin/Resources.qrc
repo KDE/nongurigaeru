@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="BlockDropArea.qml">controls/BlockDropArea.qml</file>
+        <file alias="BlockMouseArea.qml">controls/BlockMouseArea.qml</file>
+        <file alias="ToolBarView.qml">controls/ToolBarView.qml</file>
+        <file alias="ToolBarPaletteView.qml">controls/ToolBarPaletteView.qml</file>
+    </qresource>
+</RCC>

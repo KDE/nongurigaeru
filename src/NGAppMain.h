@@ -10,7 +10,7 @@
 
 #include "nglib_export.h"
 
-struct NGAppData
+struct NGAppData final
 {
 	const char* translationDomain;
 	QString desktopFile;

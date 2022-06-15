@@ -1,0 +1,6 @@
+module Nongurigaeru
+
+plugin NGLibQuickPlugin
+classname NGQuickPlugin
+
+typeinfo plugins.qmltypes

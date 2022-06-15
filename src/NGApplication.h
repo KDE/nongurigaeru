@@ -11,7 +11,7 @@
 
 class NGSavable;
 
-class NGLIB_EXPORT NGApplication : public NGApplicationSuperclass
+class NGLIB_EXPORT NGApplication final : public NGApplicationSuperclass
 {
 	Q_OBJECT
 

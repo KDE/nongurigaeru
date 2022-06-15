@@ -1,0 +1,13 @@
+BasedOnStyle: WebKit
+AlignEscapedNewlines: DontAlign
+AllowShortIfStatementsOnASingleLine: true
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Mozilla
+BreakConstructorInitializers: BeforeColon
+Cpp11BracedListStyle: true
+DerivePointerAlignment: true
+MaxEmptyLinesToKeep: 2
+SortIncludes: false
+SpaceBeforeCpp11BracedList: false
+TabWidth: 4
+UseTab: ForContinuationAndIndentation
