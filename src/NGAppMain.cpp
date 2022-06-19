@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Carson Black <uhhadd@gmail.com>
+//
+// SPDX-License-Identifier: LicenseRef-KDE-Accepted-GPL
+
 #include <KConfigGui>
 #include <KLocalizedString>
 #include <KConfig>

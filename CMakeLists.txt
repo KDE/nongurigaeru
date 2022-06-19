@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Carson Black <uhhadd@gmail.com>
+#
+# SPDX-License-Identifier: LicenseRef-KDE-Accepted-GPL
+
 cmake_minimum_required(VERSION 3.16)
 
 project(NGLib LANGUAGES CXX VERSION 1.0.0)

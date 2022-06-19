@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2022 Carson Black <uhhadd@gmail.com>
+//
+// SPDX-License-Identifier: LicenseRef-KDE-Accepted-GPL
+
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
