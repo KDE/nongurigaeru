@@ -12,6 +12,12 @@ add_library(
 		NGToolBarDelegate.cpp
 )
 
+target_compile_options(
+	NGLibQuick
+	PRIVATE
+		-Werror=deprecated-declarations
+)
+
 ecm_generate_export_header(
 	NGLibQuick
 	VERSION
@@ -48,8 +54,8 @@ target_include_directories(NGLibQuick
 
 target_link_libraries(NGLibQuick
 	PUBLIC
-		Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Quick
-		KF5::CoreAddons KF5::I18n KF5::ConfigCore KF5::ConfigGui
+		Qt::Core Qt::Gui Qt::Widgets Qt::Quick
+		KF6::CoreAddons KF6::I18n KF6::ConfigCore KF6::ConfigGui
 		NGLib
 )
 
@@ -57,7 +63,7 @@ ecm_generate_pkgconfig_file(
 	BASE_NAME
 		NGLibQuick
 	DEPS
-		Qt5Core Qt5Gui Qt5Widgets Qt5Quick
+		Qt6Core Qt6Gui Qt6Widgets Qt6Quick
 	FILENAME_VAR
 		nglibquick
 	INSTALL

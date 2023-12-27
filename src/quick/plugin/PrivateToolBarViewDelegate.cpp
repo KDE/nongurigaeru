@@ -7,6 +7,8 @@
 #include "NGBeacon.h"
 #include "PrivateToolBarViewDelegate.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 PrivateToolBarViewDelegate::PrivateToolBarViewDelegate(QObject* parent) : NGBeaconControllerDelegate(parent)
 {
 
@@ -40,9 +42,9 @@ void PrivateToolBarViewDelegate::dropEvent(NGBeacon* beacon, QDropEvent* event)
 	auto data = beacon->data();
 	auto list = data.toList();
 	auto index = list[1].toInt();
-	auto before = list[0].toString() == "before";
-	auto kind = QString::fromUtf8(event->mimeData()->data("application/x-nongurigaeru-toolbar-item"));
-	auto isDefault = QString::fromUtf8(event->mimeData()->data("application/x-nongurigaeru-toolbar-default-set")) == "yes";
+	auto before = list[0].toString() == u"before"_s;
+	auto kind = QString::fromUtf8(event->mimeData()->data(u"application/x-nongurigaeru-toolbar-item"_s));
+	auto isDefault = QString::fromUtf8(event->mimeData()->data(u"application/x-nongurigaeru-toolbar-default-set"_s)) == u"yes"_s;
 
 	if (isDefault) {
 		controller->resetToolbar();

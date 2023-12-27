@@ -10,6 +10,8 @@
 #include "NGSelfSavable.h"
 #include "NGPropertySavingRestoring.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 class SimpleObject : public QObject, public NGSelfSavable
 {
 
@@ -37,7 +39,7 @@ public:
 	SaveInformation save(KConfigGroup& state) const override
 	{
 		state.writeEntry("foo", m_foo);
-		return SaveInformation{.className = "SimpleObject*", .ok = true};
+		return SaveInformation{.className = u"SimpleObject*"_s, .ok = true};
 	}
 };
 
@@ -71,7 +73,7 @@ public:
 	SaveInformation save(KConfigGroup& state) const override
 	{
 		NGPropertySavingRestoring::saveProperties(state, this);
-		return SaveInformation{.className = "AutoObject*", .ok = true};
+		return SaveInformation{.className = u"AutoObject*"_s, .ok = true};
 	}
 };
 
@@ -85,12 +87,12 @@ class Test : public QObject
 private Q_SLOTS:
 	void testSimple()
 	{
-		auto test = KSharedConfig::openConfig("nglibtest");
+		auto test = KSharedConfig::openConfig(u"nglibtest"_s);
 
-		auto grp = test->group("simple");
+		auto grp = test->group(u"simple"_s);
 		{
 			auto object = new SimpleObject;
-			object->m_foo = "wawajete";
+			object->m_foo = u"wawajete"_s;
 			saveSavable(grp, object);
 		}
 		test->sync();
@@ -101,19 +103,19 @@ private Q_SLOTS:
 				QVERIFY(obj);
 				auto loaded = qobject_cast<SimpleObject*>(obj);
 				QVERIFY(loaded);
-				QCOMPARE(loaded->m_foo, "wawajete");
+				QCOMPARE(loaded->m_foo, u"wawajete"_s);
 			});
 		}
 	}
 	void testAuto()
 	{
-		auto test = KSharedConfig::openConfig("nglibtest");
+		auto test = KSharedConfig::openConfig(u"nglibtest"_s);
 
-		auto grp = test->group("auto");
+		auto grp = test->group(u"auto"_s);
 		{
 			auto object = new AutoObject;
 			object->m_foo = new SimpleObject;
-			object->m_foo->m_foo = "wawajete";
+			object->m_foo->m_foo = u"wawajete"_s;
 			object->m_wu = 50;
 			saveSavable(grp, object);
 		}
@@ -126,7 +128,7 @@ private Q_SLOTS:
 				QVERIFY(loaded);
 				QVERIFY(loaded->m_foo);
 				QCOMPARE(loaded->m_wu, 50);
-				QCOMPARE(loaded->m_foo->m_foo, "wawajete");
+				QCOMPARE(loaded->m_foo->m_foo, u"wawajete"_s);
 			});
 		}
 	}

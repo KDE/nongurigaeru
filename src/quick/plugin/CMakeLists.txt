@@ -17,6 +17,12 @@ target_link_libraries(
 		NGLibQuick
 )
 
+target_compile_options(
+	NGLibQuickPlugin
+	PRIVATE
+		-Werror=deprecated-declarations
+)
+
 if (BUILD_SHARED_LIBS)
 	install(DIRECTORY controls/ DESTINATION ${KDE_INSTALL_QMLDIR}/Nongurigaeru)
 	install(TARGETS NGLibQuickPlugin DESTINATION ${KDE_INSTALL_QMLDIR}/Nongurigaeru)

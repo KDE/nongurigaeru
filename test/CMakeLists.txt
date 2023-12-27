@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: LicenseRef-KDE-Accepted-GPL
 
-find_package(Qt5Test REQUIRED)
+find_package(Qt6Test REQUIRED)
 
 add_executable(testNGLib
     test.cpp
@@ -11,5 +11,5 @@ add_test(testNGLib testNGLib)
 
 target_link_libraries(
     testNGLib
-        Qt5::Test NGLib
+        Qt6::Test NGLib
 )

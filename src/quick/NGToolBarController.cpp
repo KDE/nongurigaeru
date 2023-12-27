@@ -7,6 +7,8 @@
 #include "NGToolBarController.h"
 #include "NGPrivateConstants_p.h"
 
+using namespace Qt::Literals::StringLiterals;
+
 struct NGToolBarInformation
 {
 	QList<NGToolBarItem> items;
@@ -59,7 +61,7 @@ void NGToolBarController::Private::initInfo()
 	}
 
 	auto config = preferencesConfig();
-	auto toolbar = config->group("Nongurigaeru").group("Toolbars").group(identifier);
+	auto toolbar = config->group(u"Nongurigaeru"_s).group(u"Toolbars"_s).group(identifier);
 
 	if (!toolbar.hasKey("Items")) {
 		toolbar.writeEntry("Items", delegate->defaultitems());
@@ -78,7 +80,7 @@ void NGToolBarController::Private::initInfo()
 void NGToolBarController::Private::save()
 {
 	auto config = preferencesConfig();
-	auto toolbar = config->group("Nongurigaeru").group("Toolbars").group(identifier);
+	auto toolbar = config->group(u"Nongurigaeru"_s).group(u"Toolbars"_s).group(identifier);
 	QStringList items;
 
 	for (const auto& item : info().items) {

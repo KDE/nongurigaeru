@@ -6,6 +6,7 @@
 
 #include <QQuickItem>
 
+#include "NGBeaconController.h"
 #include "nglibquick_export.h"
 
 class NGBeaconController;

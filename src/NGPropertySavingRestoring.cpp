@@ -22,7 +22,7 @@ static QList<QMetaProperty> extractProperties(const QObject* on, const QStringLi
 		const auto property = metaObject->property(propertyIndex);
 		if (properties.isEmpty()) {
 			returnProperties << property;
-		} else if (properties.contains(property.name())) {
+		} else if (properties.contains(QString::fromLocal8Bit(property.name()))) {
 			returnProperties << property;
 		}
 	}
@@ -38,7 +38,9 @@ void NGLIB_EXPORT NGPropertySavingRestoring::restoreProperties(const KConfigGrou
 		QMetaType type(prop.userType());
 
 		if (auto metaObject = type.metaObject()) {
-			if (!state.hasGroup(prop.name()) || !(state.group(prop.name()).groupList().length() > 0)) {
+			const auto propName = QString::fromLocal8Bit(prop.name());
+
+			if (!state.hasGroup(propName) || !(state.group(propName).groupList().length() > 0)) {
 				if (prop.isRequired()) {
 					// TOOD: handle failed restoration
 				}
@@ -46,15 +48,15 @@ void NGLIB_EXPORT NGPropertySavingRestoring::restoreProperties(const KConfigGrou
 				continue;
 			}
 
-			auto id = QUuid::fromString(state.group(prop.name()).groupList()[0]);
-			auto group = state.group(prop.name()).group(state.group(prop.name()).groupList()[0]);
+			auto id = QUuid::fromString(state.group(propName).groupList()[0]);
+			auto group = state.group(propName).group(state.group(propName).groupList()[0]);
 			auto restorer = getRestorer(group);
 			restorer->restore(id, group, [&](QObject* ret) {
 				prop.write(on, QVariant::fromValue(ret));
 				delete restorer;
 			});
 		} else {
-			auto variant = state.readEntry(prop.name(), QVariant(prop.type(), nullptr));
+			auto variant = state.readEntry(prop.name(), QVariant(prop.metaType(), nullptr));
 			prop.write(on, variant);
 		}
 	}
@@ -69,7 +71,7 @@ void NGLIB_EXPORT NGPropertySavingRestoring::saveProperties(KConfigGroup& state,
 
 		if (auto metaObject = type.metaObject()) {
 			auto objectValue = prop.read(from).value<QObject*>();
-			auto propertyGroup = state.group(prop.name());
+			auto propertyGroup = state.group(QString::fromLocal8Bit(prop.name()));
 
 			if (auto saver = qobject_cast<NGSavable*>(objectValue)) {
 				auto status = saveSavable(propertyGroup, saver);

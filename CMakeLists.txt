@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(BUILD_NGLIB_QUICK "Builds Nongurigaeru's components for QtQuick" ON)
 
-find_package(ECM REQUIRED NO_MODULE)
+find_package(ECM 5.240.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -23,7 +23,7 @@ include(ECMGeneratePkgConfigFile)
 include(ECMGenerateExportHeader)
 
 find_package(
-	Qt5
+	Qt6
 	COMPONENTS
 		Core Gui Widgets
 	REQUIRED
@@ -31,7 +31,7 @@ find_package(
 
 if (BUILD_NGLIB_QUICK)
 	find_package(
-		Qt5
+		Qt6
 		COMPONENTS
 			Quick
 		REQUIRED
@@ -39,7 +39,7 @@ if (BUILD_NGLIB_QUICK)
 endif()
 
 find_package(
-	KF5
+	KF6
 	COMPONENTS
 		CoreAddons I18n Config
 	REQUIRED

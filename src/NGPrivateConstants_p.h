@@ -45,15 +45,15 @@ inline NGSavable::SaveInformation saveSavable(KConfigGroup& parentGroup, const N
 
 inline NGRestorer* getRestorer(const KConfigGroup& from)
 {
-	auto restorationClass = from.readEntry<QString>(nglibRestorationClassKey, "");
-	auto type = QMetaType::type(restorationClass.toStdString().c_str());
+	auto restorationClass = from.readEntry<QString>(nglibRestorationClassKey, QString());
+	auto type = QMetaType::fromName(restorationClass.toStdString().c_str());
 
-	if (type == QMetaType::UnknownType) {
+	if (!type.isValid()) {
 		qWarning() << "Unknown restoration class" << restorationClass;
 		return nullptr;
 	}
 
-	auto metaObject = QMetaType::metaObjectForType(type);
+	auto metaObject = type.metaObject();
 	if (metaObject->constructorCount() < 1) {
 		qWarning() << "There are no invokable constructors defined for" << restorationClass;
 	}

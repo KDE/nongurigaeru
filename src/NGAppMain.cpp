@@ -20,9 +20,6 @@
 
 int NGAppMain(int* argc, char*** argv, const NGAppData& data)
 {
-	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-
 	KLocalizedString::setApplicationDomain(data.translationDomain);
 
 	NGApplication app(*argc, *argv);

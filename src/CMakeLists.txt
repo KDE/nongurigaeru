@@ -12,6 +12,12 @@ add_library(
 		NGSelfSavable.cpp
 )
 
+target_compile_options(
+	NGLib
+	PRIVATE
+		-Werror=deprecated-declarations
+)
+
 ecm_generate_export_header(
 	NGLib
 	VERSION
@@ -48,15 +54,15 @@ target_include_directories(NGLib
 
 target_link_libraries(NGLib
 	PUBLIC
-		Qt5::Core Qt5::Gui Qt5::Widgets
-		KF5::CoreAddons KF5::I18n KF5::ConfigCore KF5::ConfigGui
+		Qt::Core Qt::Gui Qt::Widgets
+		KF6::CoreAddons KF6::I18n KF6::ConfigCore KF6::ConfigGui
 )
 
 ecm_generate_pkgconfig_file(
 	BASE_NAME
 		NGLib
 	DEPS
-		Qt5Core Qt5Gui Qt5Widgets
+		Qt6Core Qt6Gui Qt6Widgets
 	FILENAME_VAR
 		nglib
 	INSTALL

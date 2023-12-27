@@ -102,7 +102,7 @@ void NGBeaconController::setDelegate(NGBeaconControllerDelegate* delegate)
 
 void NGBeaconController::dragEnterEvent(QDragEnterEvent* event)
 {
-	computeActiveBeacon(event->posF());
+	computeActiveBeacon(event->position());
 	event->acceptProposedAction();
 
 	if (d->delegate) d->delegate->dragEnterEvent(event);
@@ -110,7 +110,7 @@ void NGBeaconController::dragEnterEvent(QDragEnterEvent* event)
 
 void NGBeaconController::dragMoveEvent(QDragMoveEvent* event)
 {
-	computeActiveBeacon(event->posF());
+	computeActiveBeacon(event->position());
 
 	if (d->delegate) d->delegate->dragMoveEvent(event);
 }

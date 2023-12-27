@@ -5,6 +5,7 @@
 #pragma once
 
 #include <QQuickItem>
+#include "NGBeaconControllerDelegate.h"
 
 #include "nglibquick_export.h"
 

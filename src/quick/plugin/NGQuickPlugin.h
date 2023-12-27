@@ -5,6 +5,7 @@
 #pragma once
 
 #include <QQmlExtensionPlugin>
+#include <QDir>
 
 class NGQuickPlugin : public QQmlExtensionPlugin
 {
@@ -15,9 +16,4 @@ class NGQuickPlugin : public QQmlExtensionPlugin
 public:
 	void registerTypes(const char* uri) override;
 
-private:
-	QUrl resolveFileURL(const QString& path) const
-	{
-		return baseUrl().toString() + QLatin1Char('/') + path;
-	}
 };
