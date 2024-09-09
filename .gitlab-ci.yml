@@ -1,0 +1,4 @@
+include:
+  - project: sysadmin/ci-utilities
+    file:
+      - /gitlab-templates/linux-qt6.yml
