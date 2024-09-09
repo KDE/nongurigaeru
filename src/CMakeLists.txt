@@ -29,6 +29,8 @@ install(
 		NGLib
 	DESTINATION
 		${KDE_INSTALL_LIBDIR}
+	EXPORT
+		NongurigaeruTargets
 )
 
 install(

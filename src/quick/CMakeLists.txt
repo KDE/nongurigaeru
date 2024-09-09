@@ -29,6 +29,8 @@ install(
 		NGLibQuick
 	DESTINATION
 		${KDE_INSTALL_LIBDIR}
+	EXPORT
+		NongurigaeruTargets
 )
 
 install(
@@ -49,7 +51,7 @@ install(
 
 target_include_directories(NGLibQuick
     PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/.. ${CMAKE_CURRENT_BINARY_DIR}
-    INTERFACE "$<INSTALL_INTERFACE:${NGLIB_INSTALL_INCLUDEDIR}>"
+    INTERFACE "$<INSTALL_INTERFACE:${NGLIBQUICK_INSTALL_INCLUDEDIR}>"
 )
 
 target_link_libraries(NGLibQuick
