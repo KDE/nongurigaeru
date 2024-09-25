@@ -58,6 +58,8 @@ target_link_libraries(NGLib
 	PUBLIC
 		Qt::Core Qt::Gui Qt::Widgets
 		KF6::CoreAddons KF6::I18n KF6::ConfigCore KF6::ConfigGui
+	PRIVATE
+		KF6::DBusAddons
 )
 
 ecm_generate_pkgconfig_file(

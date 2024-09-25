@@ -6,12 +6,15 @@
 #include <KLocalizedString>
 #include <KConfig>
 #include <KSharedConfig>
+#include <KDBusService>
 
 #include <QApplication>
 #include <QDebug>
 #include <QMetaType>
 #include <QSemaphore>
 #include <QSessionManager>
+#include <QDir>
+#include <QTimer>
 
 #include "NGAppMain.h"
 #include "NGApplication.h"
@@ -24,6 +27,8 @@ int NGAppMain(int* argc, char*** argv, const NGAppData& data)
 
 	NGApplication app(*argc, *argv);
 	app.setDesktopFileName(data.desktopFile);
+
+	KDBusService service(KDBusService::Unique);
 
 	// TODO: global setting for remembering state
 	if (true) {
@@ -54,8 +59,16 @@ int NGAppMain(int* argc, char*** argv, const NGAppData& data)
 		}
 	}
 
-	if (data.initialisedCallback != nullptr) {
-		data.initialisedCallback();
+
+	if (data.activatedCallback != nullptr) {
+		if (service.isRegistered()) {
+			QTimer::singleShot(0, &service, [data, &app] {
+				data.activatedCallback(app.arguments(), QDir::currentPath());
+			});
+		}
+		QObject::connect(&service, &KDBusService::activateRequested, &service, [data](const QStringList &params, const QString &cwd) {
+			data.activatedCallback(params, cwd);
+		});
 	}
 
 	return app.exec();

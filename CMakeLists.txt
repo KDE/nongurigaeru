@@ -56,7 +56,7 @@ endif()
 find_package(
 	KF6 ${KF_MIN_VERSION}
 	COMPONENTS
-		CoreAddons I18n Config
+		CoreAddons I18n Config DBusAddons
 	REQUIRED
 )
 

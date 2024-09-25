@@ -19,7 +19,7 @@ struct NGAppData final
 	const char* translationDomain;
 	QString desktopFile;
 	KAboutData aboutData;
-	std::function<void()> initialisedCallback;
+	std::function<void(const QStringList&, const QString&)> activatedCallback;
 };
 
 int NGLIB_EXPORT NGAppMain(int* argc, char*** argv, const NGAppData& = NGAppData());
